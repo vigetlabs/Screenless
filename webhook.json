@@ -1,0 +1,10 @@
+{
+  "eventName": "graba/reserver_",
+  "url": "https://api.graba.io/api/v1/reserver",
+  "requestType": "POST",
+  "json": {
+    "task":    "{{SPARK_EVENT_VALUE}}",
+    "core_id": "{{SPARK_CORE_ID}}"
+  },
+  "mydevices": true
+}
