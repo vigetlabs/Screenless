@@ -10,6 +10,10 @@ Made at [Viget](www.viget.com).
 
 Make some cool stuff and share it @Viget!
 
+## Documentation
+
+All documentation is available in [this wiki](https://github.com/vigetlabs/Screenless/wiki/LEDs).
+
 ## Roadmap
 
 1. Handler for accelerometer
