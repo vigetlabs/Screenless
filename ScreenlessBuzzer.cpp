@@ -1,15 +1,15 @@
-#include "SLbuzzer.h"
+#include "ScreenlessBuzzer.h"
 
-SLbuzzer::SLbuzzer() {}
+ScreenlessBuzzer::ScreenlessBuzzer() {}
 
-void SLbuzzer::initialize() {
+void ScreenlessBuzzer::initialize() {
 }
 
-void SLbuzzer::updateState() {
+void ScreenlessBuzzer::updateState() {
   if (_currentSoundEffect == SONG) { _determineSongState(); }
 }
 
-void SLbuzzer::show() {
+void ScreenlessBuzzer::show() {
   //this is what makes the tone
   if (_currentSoundEffect == NONE) {
     noTone(BUZZERPIN);
@@ -22,10 +22,10 @@ void SLbuzzer::show() {
   }
 }
 
-void SLbuzzer::createSong(String song) {
+void ScreenlessBuzzer::createSong(String song) {
   _songString = song;
   //_songString.toCharArray(_inputStr,200);
-  _songBPM = _songBPM; //defaulting to the default set in SLbuzzer.h. But, this could be set on createSong.
+  _songBPM = _songBPM; //defaulting to the default set in ScreenlessBuzzer.h. But, this could be set on createSong.
   _currentSoundEffect = SONG;
   _songCurrentlyPlaying = true;
   _songStartTime = millis();
@@ -37,7 +37,7 @@ void SLbuzzer::createSong(String song) {
 
 //private
 
-void SLbuzzer::_determineSongState() {
+void ScreenlessBuzzer::_determineSongState() {
   if(_songCurrentlyPlaying) {
     if (millis() < (_songStartTime + _songLength)) {
       //cache the tone so you can avoid some extra function calls and math
@@ -61,7 +61,7 @@ void SLbuzzer::_determineSongState() {
   }
 }
 
-int SLbuzzer::_getSongLengthMS(String song){
+int ScreenlessBuzzer::_getSongLengthMS(String song){
   //returns the length of the song in MS;
   char inputStr[200];
   song.toCharArray(inputStr,200);
@@ -91,7 +91,7 @@ int SLbuzzer::_getSongLengthMS(String song){
   return length; //in ms (override with 1600 atm)
 }
 
-int SLbuzzer::_noteToTone(String note){
+int ScreenlessBuzzer::_noteToTone(String note){
   //in goes a note
   //map that note to a frequency -- this would be less expensive.
   // less expensive still, figure out if the note has changed.
@@ -148,7 +148,7 @@ int SLbuzzer::_noteToTone(String note){
   return freq;
 }
 
-String SLbuzzer::_getCurrentNote(){
+String ScreenlessBuzzer::_getCurrentNote(){
   //figure out how far along you are in the song (ms)
   int timeElapsed = millis() - _songStartTime;
   int currentSongTime = 0;

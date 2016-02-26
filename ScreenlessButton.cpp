@@ -1,13 +1,13 @@
-#include "SLbutton.h"
+#include "ScreenlessButton.h"
 
-SLbutton::SLbutton() {}
+ScreenlessButton::ScreenlessButton() {}
 
-void SLbutton::initialize() {
+void ScreenlessButton::initialize() {
   std::fill_n(previousstate, NUMBUTTONS, 1); //set the default state for all buttons manually.
   _enableInputs();
 }
 
-void SLbutton::updateState() {
+void ScreenlessButton::updateState() {
   //check all of the buttons
   static long lasttime;
   int index;
@@ -43,7 +43,7 @@ void SLbutton::updateState() {
   }
 }
 
-bool SLbutton::wasReleased(int button) {
+bool ScreenlessButton::wasReleased(int button) {
   if (justreleased[button] == 1) {
     return 1;
   } else {
@@ -51,7 +51,7 @@ bool SLbutton::wasReleased(int button) {
   }
 }
 
-bool SLbutton::wasHeld(int button) {
+bool ScreenlessButton::wasHeld(int button) {
   if (pressed[button] && (pressedTime[button] - justPressedTime[button]) >= SHORTHOLD) {
     justPressedTime[button] = millis();     //clear the hold
     return 1;
@@ -60,7 +60,7 @@ bool SLbutton::wasHeld(int button) {
   }
 }
 
-bool SLbutton::hasSequence(String sequence) {
+bool ScreenlessButton::hasSequence(String sequence) {
   if (_checkHistory(sequence)) { //if history has this sequence respond with 1
     _clearHistory(); //also clear the history because the sequence has been matched
     return 1;
@@ -69,13 +69,13 @@ bool SLbutton::hasSequence(String sequence) {
   }
 }
 
-long SLbutton::getLastEngagementTime() {
+long ScreenlessButton::getLastEngagementTime() {
   return _lastEngagementTime;
 }
 
 //PRIVATE ///////////////////////////////////////////////////////////
 
-bool SLbutton::_checkHistory(String sequence) {
+bool ScreenlessButton::_checkHistory(String sequence) {
   if (_justPressedHistoryString.indexOf(sequence) != -1) {
     return 1;
   } else {
@@ -83,12 +83,12 @@ bool SLbutton::_checkHistory(String sequence) {
   }
 }
 
-void SLbutton::_clearHistory(){
+void ScreenlessButton::_clearHistory(){
   _justPressedHistoryString = ""; // clear the string
   std::fill_n(justPressedHistory, 8, 0); // clear the array
 }
 
-void SLbutton::_addPressToHistory(int button) {
+void ScreenlessButton::_addPressToHistory(int button) {
   int i;
   _justPressedHistoryString = ""; //empty the string to rebuild it from scratch
   //Clear the history after some time
@@ -106,7 +106,7 @@ void SLbutton::_addPressToHistory(int button) {
   _lastButtonPress = millis();
 }
 
-void SLbutton::_enableInputs() {
+void ScreenlessButton::_enableInputs() {
   int i;
   for (i=0; i< NUMBUTTONS; i++) {
     pinMode(buttonPins[i], INPUT_PULLUP);

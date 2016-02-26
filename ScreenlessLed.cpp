@@ -1,15 +1,15 @@
-#include "SLLED.h"
+#include "ScreenlessLed.h"
 
 Adafruit_NeoPixel leds = Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE);
 
-SLLED::SLLED() {}
+ScreenlessLed::ScreenlessLed() {}
 
-void SLLED::initialize() {
+void ScreenlessLed::initialize() {
   leds.begin();
   leds.setBrightness(BRIGHTNESS);
 }
 
-void SLLED::updateState() {
+void ScreenlessLed::updateState() {
   //determine what the current state (what colors go where). Called every loop.
   //check if there is a breath, if so, ask it what to do.
   if (_currentEffect == BREATH) { _determineBreathState(); }
@@ -18,39 +18,39 @@ void SLLED::updateState() {
   if (_currentEffect == QUAD) { _determineQuadState(); }
 }
 
-void SLLED::show() {
+void ScreenlessLed::show() {
   //show the state which was determined in updateState
   leds.show();
 }
 
-void SLLED::setAllNow(long color) {
+void ScreenlessLed::setAllNow(long color) {
   setAll(color);
   leds.show();
 }
 
-void SLLED::setAll(long color){
+void ScreenlessLed::setAll(long color){
   for (int i=0; i<PIXEL_COUNT; i++) {
     leds.setPixelColor(i, color);
   }
 }
 
-void SLLED::setAllGRB(int red, int green, int blue) {
+void ScreenlessLed::setAllGRB(int red, int green, int blue) {
   for (int i=0; i<PIXEL_COUNT; i++) {
     leds.setPixelColor(i, red, green, blue);
   }
 }
 
-void SLLED::setOne(int led, long color) {
+void ScreenlessLed::setOne(int led, long color) {
     leds.setPixelColor(led, color);
 }
 
-void SLLED::setOneRGB(int led, int red, int green, int blue) {
+void ScreenlessLed::setOneRGB(int led, int red, int green, int blue) {
     leds.setPixelColor(led, red, green, blue);
 }
 
 // CREATE ----------------
 
-void SLLED::createBreath(int cycleLength, int duration, uint32_t sColor, uint32_t fColor, uint32_t fadeToColor) {
+void ScreenlessLed::createBreath(int cycleLength, int duration, uint32_t sColor, uint32_t fColor, uint32_t fadeToColor) {
   _currentEffect = BREATH;
   _targetCycleLength = cycleLength; //seconds per cycle of all LEDs
   _targetDuration = duration;
@@ -61,7 +61,7 @@ void SLLED::createBreath(int cycleLength, int duration, uint32_t sColor, uint32_
   _targetDirection = true;
 }
 
-void SLLED::createFade(int duration, uint32_t sColor, uint32_t fColor) {
+void ScreenlessLed::createFade(int duration, uint32_t sColor, uint32_t fColor) {
   _currentEffect = FADE;
   _targetDuration = duration;
   _targetStartTime = millis();
@@ -69,7 +69,7 @@ void SLLED::createFade(int duration, uint32_t sColor, uint32_t fColor) {
   _targetFColor = fColor;
 }
 
-void SLLED::createRunner(uint32_t color, int speed, int duration, bool direction) {
+void ScreenlessLed::createRunner(uint32_t color, int speed, int duration, bool direction) {
   _currentEffect = RUNNER;
   _targetSpeed = speed; //ms
   _targetDuration = duration; //ms
@@ -78,7 +78,7 @@ void SLLED::createRunner(uint32_t color, int speed, int duration, bool direction
   _targetDirection = direction;
 }
 
-void SLLED::createQuad(int data[4], int pace) {
+void ScreenlessLed::createQuad(int data[4], int pace) {
   _currentEffect = QUAD;
   _targetSteps = pace;
   //Handle Rotation (power cord out bottom)
@@ -102,7 +102,7 @@ void SLLED::createQuad(int data[4], int pace) {
 
 //PRIVATE ----------------
 
-void SLLED::_determineBreathState() {
+void ScreenlessLed::_determineBreathState() {
   // is breath over? if so, remove the current effect
   if((_targetStartTime + _targetDuration) < millis()) {
     _currentEffect = NONE;
@@ -149,7 +149,7 @@ void SLLED::_determineBreathState() {
   }
 }
 
-void SLLED::_determineFadeState() {
+void ScreenlessLed::_determineFadeState() {
   if((_targetStartTime + _targetDuration) < millis()) {
     _currentEffect = NONE;
   } else {
@@ -174,7 +174,7 @@ void SLLED::_determineFadeState() {
   }
 }
 
-void SLLED::_determineRunnerState() {
+void ScreenlessLed::_determineRunnerState() {
   if((_targetStartTime + _targetDuration) < millis()) {
     _currentEffect = NONE;
     setAll(0x000000);
@@ -200,7 +200,7 @@ void SLLED::_determineRunnerState() {
   }
 }
 
-void SLLED::_determineQuadState() {
+void ScreenlessLed::_determineQuadState() {
   long color;
   int led1 = 0;
   int led2 = 1;
@@ -239,7 +239,7 @@ void SLLED::_determineQuadState() {
   }
 }
 
-int SLLED::_led2Quad(int quadArrayIndex, int ledPosition){
+int ScreenlessLed::_led2Quad(int quadArrayIndex, int ledPosition){
   switch (quadArrayIndex) {
       case 0:
         return 0 + ledPosition;

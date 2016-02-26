@@ -1,5 +1,5 @@
-#ifndef SLbuzzer_h
-#define SLbuzzer_h
+#ifndef ScreenlessBuzzer_h
+#define ScreenlessBuzzer_h
 
 #include "application.h"
 #include "math.h"
@@ -11,10 +11,10 @@
 #define SONG          1
 #define PLAY          2
 
-class SLbuzzer
+class ScreenlessBuzzer
 {
   public:
-    SLbuzzer();
+    ScreenlessBuzzer();
 
     void
       initialize(),

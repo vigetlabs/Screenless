@@ -1,5 +1,5 @@
-#ifndef SLLED_h
-#define SLLED_h
+#ifndef ScreenlessLed_h
+#define ScreenlessLed_h
 
 #include "neopixel.h"
 #include "math.h"
@@ -31,10 +31,10 @@
 #define RUNNER        3
 #define QUAD          4
 
-class SLLED
+class ScreenlessLed
 {
   public:
-    SLLED();
+    ScreenlessLed();
 
     void
       initialize(),

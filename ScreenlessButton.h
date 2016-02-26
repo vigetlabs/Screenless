@@ -1,5 +1,5 @@
-#ifndef SLbutton_h
-#define SLbutton_h
+#ifndef ScreenlessButton_h
+#define ScreenlessButton_h
 
 #include "application.h"
 
@@ -8,10 +8,10 @@
 #define SHORTHOLD 1000
 #define SEQUENCEWAIT 1000 //how long to wait before before presses before clearing the button press history
 
-class SLbutton
+class ScreenlessButton
 {
   public:
-    SLbutton();
+    ScreenlessButton();
 
     void
       initialize(),
