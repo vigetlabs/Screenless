@@ -27,17 +27,25 @@ void determineState() {
   screenlessLed.updateState();
   screenlessBuzzer.updateState();
 
-  if (screenlessButton.wasReleased(0) || screenlessButton.wasReleased(1) || screenlessButton.wasReleased(2) || screenlessButton.wasReleased(3)) {
-    Serial.println("A button was released");
+
+  if (screenlessButton.wasReleased(0)) {
+    screenlessLed.createFade(8000,VORANGE,VBLUE);
   }
-  if (screenlessButton.wasHeld(0) || screenlessButton.wasHeld(1) || screenlessButton.wasHeld(2) || screenlessButton.wasHeld(3)) {
-    Serial.println("A button was held");
+
+  if (screenlessButton.wasReleased(1)) {
+    screenlessLed.createBreath(2000,8000,VORANGE,VBLUE);
   }
-  if (screenlessButton.hasSequence("123")) { Serial.println("Fade"); screenlessLed.createBreath(2000,8000,VORANGE,VBLUE); }
-  if (screenlessButton.hasSequence("1122")) { Serial.println("Breath"); screenlessLed.createBreath(2000,8000,VORANGE,VBLUE); }
-  if (screenlessButton.hasSequence("2233")) { Serial.println("Runner"); screenlessLed.createRunner(VORANGE,1000,4000,CLOCKWISE); }
-  if (screenlessButton.hasSequence("3300")) { Serial.println("Quad"); int newQuad[] {1,1,0,0}; screenlessLed.createQuad(newQuad,6000);}
-  if (screenlessButton.hasSequence("3333")) { Serial.println("Song & Runner"); screenlessBuzzer.createSong("E5,8,G5,8,E6,8,C6,4,D6,4,G6,4"); screenlessLed.createRunner(BLUE,800,1600,CLOCKWISE); }
+
+  if (screenlessButton.wasReleased(2)) {
+    screenlessLed.createRunner(VORANGE,1000,4000,CLOCKWISE);
+  }
+
+  if (screenlessButton.wasHeld(3)) {
+    int newQuad[] {1,2,3,0};
+    screenlessLed.createQuad(newQuad,6000);
+    screenlessBuzzer.createSong("E5,8,G5,8,E6,8,C6,4,D6,4,G6,4");
+  }
+
 }
 
 void displayState() {
