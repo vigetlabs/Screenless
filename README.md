@@ -10,8 +10,6 @@ Made at [Viget](www.viget.com).
 
 Make some cool stuff and share it @Viget!
 
-[[https://github.com/vigetlabs/Screenless/blob/master/hardware/Images/grabadot.gif]]
-
 ## Roadmap
 
 1. Handler for accelerometer
