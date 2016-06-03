@@ -1,7 +1,7 @@
 ## Overview
 Screenless is a mug-sized alternative user interface (AUI) for rapidly prototyping a screenless interface. It is built on top of the [Particle Internet Button](https://store.particle.io). Everything from the hardware to the software is open source. *Think of Screenless as Bootstrap for AUIs.*
 
-Made at [Viget](www.viget.com).   
+Made at [Viget](http://www.viget.com).   
 
 ## Basic Setup
 1. This repository is already setup to work with Particle Dev. Follow [these instructions](https://www.particle.io/dev) to get started.
